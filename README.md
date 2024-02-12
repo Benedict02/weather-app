@@ -1,2 +1,5 @@
 # weather-app
-The genesis of BETHAN
+BETHAN == BEN ETHAN
+
+Vite: React.js
+Python: Flask
