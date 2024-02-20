@@ -1,5 +1,6 @@
 # weather-app
 BETHAN == BEN ETHAN
+
 BETHAN WEATHER
 
 Vite: React.js
