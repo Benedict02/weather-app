@@ -45,6 +45,7 @@ function WeatherDisplay() {
         <div>
           <p>Location: {weather.name}</p>
           <p>Temperature: {weather.main.temp} °C</p>
+          <p>Feels like {weather.main.feels_like}°C</p>
           <p>Weather: {weather.weather[0].description}</p>
         </div>
       ) : null}
