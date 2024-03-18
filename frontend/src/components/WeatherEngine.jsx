@@ -1,34 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import MapEngine from "./MapEngine";
 
 function WeatherDisplay() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+
   const apiKey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
 
-  function handleLocationClick() {
+  useEffect(() => {
+    if (location) {
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&units=metric`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setWeather(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [location, apiKey]);
+
+  const handleLocationClick = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(success, error);
     } else {
       console.log("Geolocation not supported");
     }
-  }
+  };
 
   function success(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
+    const { latitude, longitude } = position.coords;
     setLocation({ latitude, longitude });
-    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-
-    // Make API call to OpenWeatherMap
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setWeather(data);
-        console.log(data);
-      })
-      .catch((error) => console.log(error));
   }
 
   function error() {
@@ -44,11 +47,16 @@ function WeatherDisplay() {
       {weather ? (
         <div>
           <p>Location: {weather.name}</p>
+          <p>
+            Latitude : {weather.coord.lat} Longitude : {weather.coord.lon}
+          </p>
+
           <p>Temperature: {weather.main.temp} °C</p>
           <p>Feels like {weather.main.feels_like}°C</p>
           <p>Weather: {weather.weather[0].description}</p>
         </div>
       ) : null}
+      <MapEngine lat={weather.coord.lat} long={weather.coord.long} />
     </div>
   );
 }
