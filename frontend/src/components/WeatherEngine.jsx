@@ -56,7 +56,12 @@ function WeatherDisplay() {
           <p>Weather: {weather.weather[0].description}</p>
         </div>
       ) : null}
-      <MapEngine lat={weather.coord.lat} long={weather.coord.long} />
+      {location && (
+        <>
+          <MapEngine lat={location.latitude} long={location.longitude} />
+        </>
+      )}
+      {/* USE LEAFLET NEXT TIME YA */}
     </div>
   );
 }

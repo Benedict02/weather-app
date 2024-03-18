@@ -1,5 +1,6 @@
 const MapEngine = (lat, long) => {
-  const src = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${long}#map=12/${lat}/${long}&layers=N`;
+  const src = `https://www.openstreetmap.org/?mlat=<span class="math-inline">${lat}&mlon=</span>${long}#map=12/<span class="math-inline">${lat}/</span>${long}&layers=N`;
+  // const src = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${long}#map=12/${lat}/${long}&layers=N`;
   return (
     <>
       <iframe
