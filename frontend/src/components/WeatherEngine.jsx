@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import MapEngine from "./MapEngine";
-
+import { MapContainer, TileLayer } from "react-leaflet";
 function WeatherDisplay() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
@@ -37,7 +36,6 @@ function WeatherDisplay() {
   function error() {
     console.log("Unable to retrieve your location");
   }
-
   return (
     <div>
       {!location ? (
@@ -58,10 +56,19 @@ function WeatherDisplay() {
       ) : null}
       {location && (
         <>
-          <MapEngine lat={location.latitude} long={location.longitude} />
+          <MapContainer
+            center={[location.latitude, location.longitude]}
+            zoom={20}
+            scrollWheelZoom={false}
+            style={{ width: "900px", height: "600px", position: "absolute" }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+          </MapContainer>
         </>
       )}
-      {/* USE LEAFLET NEXT TIME YA */}
     </div>
   );
 }
