@@ -1,3 +1,9 @@
-# First project for learning react
+# weather-app
+BETHAN == BEN ETHAN
 
-Goal: Learn how to fetch from an API & hide api keys (using .env)
+BETHAN WEATHER
+
+Vite: React.js
+This project is dedicated on learning how to use an API.
+1. fetch data from an API
+2. Hide API keys using .env
